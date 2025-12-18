@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 独家曝光！陈丽君与李云霄！</title>
+    <style>
+        /* Base styles for both sections */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa; /* Light grey/blue background for a modern feel */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll for confetti */
+        }
+
+        /* Styles for the "陈丽君李云霄" (Prank Initiator) section */
+        #prank-initiator {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 550px; /* Slightly wider to accommodate image */
+            width: 90%;
+            border-left: 5px solid #6c5ce7; /* A vibrant purple for "exclusive" feel */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            position: relative; /* For image positioning */
+        }
+        #prank-initiator.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none; /* Disable interaction when hidden */
+            position: absolute; /* Take it out of flow when hidden to not affect layout */
+        }
+        #prank-initiator h1 {
+            color: #6c5ce7; /* Purple title */
+            margin-bottom: 20px;
+            font-size: 2.3em;
+            position: relative;
+            animation: pulse 1.5s infinite alternate;
+        }
+        #prank-initiator h1::before {
+            content: '✨'; /* Sparkle emoji */
+            margin-right: 15px;
+        }
+        #prank-initiator .hero-image {
+            width: 100%;
+            max-width: 450px; /* Max width for the image */
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+			display: block; /* 使得 margin auto 生效 */
+            margin: 30px auto; /* 上下30px，左右自动居中 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            aspect-ratio: 9/16; /* Common aspect ratio for photos */
+        }
+        #prank-initiator p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        #prank-initiator .button {
+            display: inline-block;
+            background-color: #ff6b6b; /* A soft red/pink for attraction */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+        }
+        #prank-initiator .button:hover {
+            background-color: #e65252; /* Darker on hover */
+            transform: translateY(-2px);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        /* Styles for the "肯德基疯狂星期四" (Prank Reveal) section - UNCHANGED */
+        #kfc-prank {
+            display: none; /* Hidden by default */
+            position: fixed; /* Use fixed to cover entire screen */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #000; /* KFC theme black */
+            color: #e4002b; /* KFC theme red */
+            opacity: 0; /* Start invisible for fade-in */
+            transition: opacity 1s ease-in;
+            font-family: 'ZCOOL KuaiLe', cursive; /* Apply crazy font */
+            z-index: 1000; /* Ensure it's on top */
+        }
+        #kfc-prank.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap'); /* Import a more "crazy" font */
+        
+        .bg-confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .bg-confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #e4002b; /* Red confetti */
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        .bg-confetti div:nth-child(2n) { background-color: #fff; /* White confetti */ }
+        .bg-confetti div:nth-child(3n) { background-color: #ffd700; /* Gold confetti */ }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        #kfc-prank h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            text-shadow: 5px 5px #ffc107, 10px 10px #e4002b; /* Exaggerated text shadow */
+            letter-spacing: 5px;
+            animation: bounce 0.8s infinite alternate;
+            z-index: 1;
+            position: relative;
+        }
+        #kfc-prank p {
+            font-size: 2.5em;
+            color: #fff; /* White text stands out */
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 3px dashed #ffd700; /* Gold dashed border */
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: fadeIn 2s ease-out;
+            z-index: 1;
+            position: relative;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        }
+        .kfc-logo {
+            width: 200px;
+            margin-top: 50px;
+            animation: spin 5s linear infinite; /* Logo spin animation */
+            z-index: 1;
+            position: relative;
+        }
+        .disclaimer {
+            font-family: Arial, sans-serif; /* Normal font for disclaimer */
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 40px;
+            z-index: 1;
+            position: relative;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #prank-initiator h1 { font-size: 1.8em; }
+            #prank-initiator p { font-size: 1em; }
+            #prank-initiator .button { padding: 12px 25px; font-size: 1.1em; }
+            #prank-initiator .hero-image { max-width: 90%; }
+
+            #kfc-prank h1 {
+                font-size: 3.5em;
+                letter-spacing: 3px;
+            }
+            #kfc-prank p {
+                font-size: 1.8em;
+                padding: 10px 20px;
+            }
+            .kfc-logo {
+                width: 150px;
+            }
+        }
+        @media (max-width: 480px) {
+            #prank-initiator h1 { font-size: 1.5em; }
+            #prank-initiator p { font-size: 0.9em; }
+            #prank-initiator .button { padding: 10px 20px; font-size: 1em; }
+            
+            #kfc-prank h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+                text-shadow: 3px 3px #ffc107, 6px 6px #e4002b;
+            }
+            #kfc-prank p {
+                font-size: 1.4em;
+                padding: 8px 15px;
+            }
+            .kfc-logo {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="prank-initiator">
+        <h1>🔥 独家！陈丽君与李云霄震撼合体！ 🔥</h1>
+        <img src="file.jpg" alt="陈丽君与李云霄合照" class="hero-image">
+        <p>万众瞩目的时刻！陈丽君与李云霄世纪同框，独家高清合照首次曝光！速来围观，了解她们背后的故事，还有神秘惊喜等你发现！</p>
+        <button class="button" onclick="showKFCPrank();">⚡️ 立即揭秘！点击查看大图 ⚡️</button>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #888;">娱乐速递 &copy; 2025</p>
+    </div>
+
+    <div id="kfc-prank">
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+        <div class="bg-confetti"></div>
+    
+        <h1>🥳 惊喜吗？！刺激吗？！ 🥳</h1>
+        <p>⚡️ 疯狂星期四！V 我 50！我告诉你今天有什么！⚡️</p>
+        <img src="https://www.kfc.com.cn/kfcchef/img/kfc_logo.png" alt="KFC Logo" class="kfc-logo">
+        <div class="disclaimer">
+            <p>友情提示：本页面纯属娱乐，旨在为您带来欢乐。实际优惠信息请以肯德基官方发布为准。</p>
+            <p>祝您有一个“疯狂”的星期四！🎉</p>
+        </div>
+    </div>
+
+    <script>
+        function showKFCPrank() {
+            const initiator = document.getElementById('prank-initiator');
+            const kfcPrank = document.getElementById('kfc-prank');
+
+            initiator.classList.add('hidden'); // Fade out and hide the initiator
+            
+            // Wait for fade-out to complete before displaying the prank content
+            setTimeout(() => {
+                initiator.style.display = 'none'; // Completely remove from layout
+                kfcPrank.classList.add('visible'); // Make KFC prank visible and fade in
+            }, 500); // Match the CSS transition duration
+            
+            // Dynamic confetti generation for KFC page
+            const confettiContainer = document.getElementById('kfc-prank'); // Select the kfc-prank container
+            const existingConfetti = confettiContainer.querySelectorAll('.bg-confetti div').length; // Check if confetti already exists
+            
+            // Only generate confetti if it hasn't been generated yet for this page
+            if (existingConfetti < 10) { // Default 10 divs are for the containers, so generate more
+                for (let i = 0; i < 50; i++) {
+                    const confettiDiv = document.createElement('div');
+                    confettiDiv.style.left = Math.random() * 100 + 'vw';
+                    confettiDiv.style.animationDelay = Math.random() * -10 + 's'; // Stagger animation start times
+                    confettiDiv.style.animationDuration = Math.random() * 5 + 5 + 's'; // Random animation duration
+                    confettiDiv.style.width = Math.random() * 8 + 5 + 'px';
+                    confettiDiv.style.height = confettiDiv.style.width;
+                    const containers = confettiContainer.querySelectorAll('.bg-confetti');
+                    if (containers.length > 0) {
+                        containers[Math.floor(Math.random() * containers.length)].appendChild(confettiDiv);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
